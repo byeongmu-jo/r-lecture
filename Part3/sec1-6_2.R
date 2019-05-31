@@ -50,10 +50,3 @@ list1$brith <- '1993-07-23'
 list1$name <- c('jobyeongmu','jo-bm')
 list1$brith <- NULL    #데이터 삭제
 list1
-
-
-
-
-
-
-
