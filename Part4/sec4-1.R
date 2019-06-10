@@ -174,7 +174,6 @@ library(devtools)
 install.packages('d3Network')
 library(d3Network)
 
-
 name <- c('Angela Bassett','Jessica Lange','Winona Ryder','Michelle Pfeiffer',
             'Whoopi Goldberg','Emma Thompson','Julia Roberts','Sharon Stone','Meryl Streep',
             'Susan Sarandon','Nicole Kidman')
