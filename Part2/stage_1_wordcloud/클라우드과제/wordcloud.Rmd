@@ -1,0 +1,40 @@
+---
+title: "jbm"
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r}
+library(tm)
+library(KoNLP)  
+library(wordcloud)
+library(stringr)
+library(RColorBrewer)
+library(wordcloud2)
+library(rJava)
+useSejongDic()
+useNIADic()
+
+data1 <- readLines('응답소_2015_01.txt')
+
+data1_1 <- sapply(data1, extractNoun, USE.NAMES=F)
+data1_2 <- unlist(data1_1) #명사만 추출
+data1_3 <- Filter(function(x) {nchar(x) >= 2} ,data1_2)#2개 이상단어
+data1_4 <- Filter(function(x) {nchar(x) <= 10} ,data1_3) #글자 수 10 이하만 가져오
+
+data1_4 <- gsub('[~!@#$%&*()_+=?<>]','',data1_4)
+data1_4 <- gsub("\\d+","", data1_4)
+data1_4 <- gsub(" ","", data1_4)
+data1_4 <- gsub("-","",data1_4)
+data1_4 <- gsub("제목","",data1_4)
+
+data1_5 <-head(sort(data1_4, decreasing = T),500)
+
+
+write(unlist(data1_5),"data1_6.txt")
+data1_7 <- readLines("data1_6.txt")
+nrow(data1_7)
+data1_8 <- table(data1_7)
+wordcloud2(data1_8)
+```
+
