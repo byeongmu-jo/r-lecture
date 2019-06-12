@@ -7,6 +7,7 @@ library(stringr)
 library(RColorBrewer)
 useSejongDic() 
 
+
 mergeUserDic(data.frame(readLines("제주도여행지.txt"), "ncn"))
 
 txt <- readLines("jeju.txt")
@@ -30,6 +31,8 @@ for( i in 1:cnt_txt) {
 place
 
 place <- Filter(function(x) {nchar(x) >= 2} ,place)
+
+
 write(unlist(place),"jeju_2.txt") 
 rev <- read.table("jeju_2.txt")
 nrow(rev)   
@@ -41,6 +44,14 @@ wordcloud(names(wordcount), freq=wordcount, scale=c(5,1), rot.per=0.25, min.freq
 legend(0.3,1 ,"제주도 추천 여행 코스 분석",cex=0.8,fill=NA,border=NA,bg="white" ,text.col="red",text.font=2,box.col="red")
 
 
+install.packages("plotrix")
+library(plotrix)
+th_pct <- round(bchart/sum(bchart) * 100,1)
+th_names <- names(bchart)
+th_labels <- paste(th_names,"\n","(",th_pct,")")
+
+pie3D(bchart,main="제주도 추천 여행 코스 Top 10",col=rainbow(10),
+         cex=0.3,labels=th_labels,explode=0.05)
 
 
 
